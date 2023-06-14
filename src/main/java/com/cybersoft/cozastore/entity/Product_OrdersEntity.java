@@ -1,37 +1,37 @@
 package com.cybersoft.cozastore.entity;
 
+import com.cybersoft.cozastore.entity.ids.Product_OrderIds;
+
 import javax.persistence.*;
 
 @Entity(name = "Product_Orders")
 public class Product_OrdersEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
-    @Column(name = "quantity", nullable = false)
-    private int quantity;
-
+    @EmbeddedId
+    private Product_OrderIds productOrderIds;
     @ManyToOne
-    @JoinColumn(name = "OrdersID")
+    @JoinColumn(name = "OrdersID", insertable = false,updatable = false)
     private OrdersEntity order;
 
     @ManyToOne
-    @JoinColumn(name = "ProductID")
+    @JoinColumn(name = "ProductID", insertable = false,updatable = false)
     private ProductEntity product;
+    @Column(name = "quantity")
+    private int quatity;
 
-    public int getID() {
-        return ID;
+    public int getQuatity() {
+        return quatity;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setQuatity(int quatity) {
+        this.quatity = quatity;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public Product_OrderIds getProductOrderIds() {
+        return productOrderIds;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setProductOrderIds(Product_OrderIds productOrderIds) {
+        this.productOrderIds = productOrderIds;
     }
 
     public OrdersEntity getOrder() {
